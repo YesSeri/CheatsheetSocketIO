@@ -1,11 +1,9 @@
 # Intro
 
-This is a cheat sheet for SocketIO, because I found the documentation lacking.
 ## Foreword
 
+This is a cheat sheet for SocketIO, because I found the documentation lacking.
 This is for Node.js and React. Most of this is about Node.js, so even if you don't use React, you should be able to use a lot.
-
-
 
 # Main
 
@@ -34,7 +32,7 @@ const io = require('socket.io')(httpServer);
 
 const PORT = process.env.PORT || 5000;
 http.listen(PORT, () => {
-    console.log(`Listening at port ${PORT}`);
+	console.log(`Listening at port ${PORT}`);
 });
 ```
 
@@ -54,10 +52,10 @@ This establishes a connection between the computer and the server. On connection
 
 ```javascript
 io.on('connection', (socket) => {
-    console.log('User Connected');
-    socket.on('disconnect', () => {
-        console.log('User Disconnected');
-    });
+	console.log('User Connected');
+	socket.on('disconnect', () => {
+		console.log('User Disconnected');
+	});
 });
 ```
 
@@ -74,14 +72,14 @@ const ENDPOINT = 'http://127.0.0.1:5000';
 const socket = socketIOClient(ENDPOINT);
 
 const Test = () => {
-  const [data, setdata] = ("");
-  useEffect(() => {
-        socket.on('serverEvent', (payload) => {
-            setData(data);
-        });                                                // The return function in useEffect is executed
-        return socket.disconnect; // when user leaves site or page
-    }, []);
-}
+	const [data, setdata] = '';
+	useEffect(() => {
+		socket.on('serverEvent', (payload) => {
+			setData(data);
+		}); // The return function in useEffect is executed
+		return socket.disconnect; // when user leaves site or page
+	}, []);
+};
 
 export default Test;
 ```
@@ -127,11 +125,11 @@ io.on('connection', (socket) => {
 
 ## Recieve
 
-Recieve like this. Test is the event being emitted, and payload the info\('hey'\). You can think of the event being emitted as the the channel on which you recieve things. 
+Recieve like this. Test is the event being emitted, and payload the info\('hey'\). You can think of the event being emitted as the the channel on which you recieve things.
 
 ```javascript
 socket.on('test', (payload) => {
-    console.log(payload);
+	console.log(payload);
 });
 ```
 
@@ -146,7 +144,7 @@ A space called '/my-namespace' is created. Use nsp.emit to use it.
 ```javascript
 const nsp = io.of('/my-namespace');
 nsp.on('connection', function (socket) {
-    nsp.emit('hi', 'Hello everyone!');
+	nsp.emit('hi', 'Hello everyone!');
 });
 ```
 
@@ -157,7 +155,7 @@ Joins a namespace. Used to clearly seperate people, and divide the load on serve
 ```javascript
 const socket = io('/my-namespace');
 socket.on('test', function (data) {
-    console.log(data);
+	console.log(data);
 });
 ```
 
@@ -169,8 +167,8 @@ This makes socket join a room called 'testRoom' and emits event 'serverEvent' wi
 
 ```javascript
 io.on('connection', (socket) => {
-  socket.join('testRoom');
-  io.sockets.in(room).emit('serverEvent', 'hey');
+	socket.join('testRoom');
+	io.sockets.in(room).emit('serverEvent', 'hey');
 });
 ```
 
@@ -180,9 +178,9 @@ If you want to choose what room to join from the client side, you can use this s
 
 ```javascript
 io.on('connection', (socket) => {
-  socket.on('join', (room) => {
-    socket.join(room);
-  });
+	socket.on('join', (room) => {
+		socket.join(room);
+	});
 });
 ```
 
@@ -198,15 +196,15 @@ socket.emit('join', 'roomName');
 
 The client API has the following functions.
 
-* **connect** − When the client successfully connects.
-* **connecting** − When the client is in the process of connecting.
-* **disconnect** − When the client is disconnected.
-* **connect\_failed** − When the connection to the server fails.
-* **error** − An error event is sent from the server.
-* **message** − When the server sends a message using the **send** function.
-* **reconnect** − When reconnecting to the server is successful.
-* **reconnecting** − When the client is in the process of connecting.
-* **reconnect\_failed** − When the reconnect attempt fails.
+- **connect** − When the client successfully connects.
+- **connecting** − When the client is in the process of connecting.
+- **disconnect** − When the client is disconnected.
+- **connect_failed** − When the connection to the server fails.
+- **error** − An error event is sent from the server.
+- **message** − When the server sends a message using the **send** function.
+- **reconnect** − When reconnecting to the server is successful.
+- **reconnecting** − When the client is in the process of connecting.
+- **reconnect_failed** − When the reconnect attempt fails.
 
 One example would be:
 
@@ -215,4 +213,3 @@ socket.on('connect_failed', () => {
   console.log('Connection failed'
 })
 ```
-
