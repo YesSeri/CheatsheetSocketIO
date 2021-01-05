@@ -50,7 +50,7 @@ Now we will learn how to use Socket.IO in detail.
 
 This establishes a connection between the computer and the server. On connection the first callback function executes. On disconnect, the dc callback function executes.
 
-#### Server
+### Server
 
 ```javascript
 io.on('connection', (socket) => {
@@ -61,7 +61,7 @@ io.on('connection', (socket) => {
 });
 ```
 
-#### Client
+### Client
 
 This establishes a socket between server and client and listens for an event call 'serverEvent'.
 
@@ -127,7 +127,7 @@ io.on('connection', (socket) => {
 
 ## Recieve
 
-Recieve like this. Test is the channel, and payload the info\('hey'\).
+Recieve like this. Test is the event being emitted, and payload the info\('hey'\). You can think of the event being emitted as the the channel on which you recieve things. 
 
 ```javascript
 socket.on('test', (payload) => {
