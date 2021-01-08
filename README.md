@@ -165,6 +165,8 @@ socket.on('test', function (data) {
 
 This makes socket join a room called 'testRoom' and emits event 'serverEvent' with the message 'hey' to all in the room. The logic for which room is joined only happens on the serverSide. There is no `join()` function for clientside.
 
+Use `io.sockets.in(room).emit` to send to everyone in a room. Use `socket.emit` to send to the socket. Use `socket.to(room).emit` to send to everyone in the room, except the socket.
+
 ```javascript
 io.on('connection', (socket) => {
 	socket.join('testRoom');
